@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/First_API_beta2.props" />
+</Project>
