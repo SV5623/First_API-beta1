@@ -4,6 +4,7 @@ public class Mechaniс : User
 {
     [Key]
     public int Id { get; set; }
+    
     public string Specialization { get; set; }
     public int Hours { get; set; }
     

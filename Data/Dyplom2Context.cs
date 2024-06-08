@@ -17,7 +17,7 @@ public partial class Dyplom2Context : DbContext
     
     public DbSet<MechaniсWorkType> MechaniсWorkTypes { get; set; }
     
-    public DbSet<Client> Clients { get; set; }
+    public DbSet<Car> Clients { get; set; }
 
     public DbSet<Mechaniс> Mechaniks { get; set; }
     

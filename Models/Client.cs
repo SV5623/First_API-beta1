@@ -2,11 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace boba_API.Models;
 
-public class Client : User
+public class Client
 {
     [Key]
     public int Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public ICollection<Car_Detail> CarDetails { get; set; }
+    public required string FirstName { get; set; }
+    public required string LastName { get; set; }
+    
+    public List<Car> Cars { get; set; }
 }

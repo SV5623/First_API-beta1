@@ -103,3 +103,4 @@
 /home/s623/Media/Try/API/beta2/First_API_beta2/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/s623/Media/Try/API/beta2/First_API_beta2/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/s623/Media/Try/API/beta2/First_API_beta2/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/home/s623/Media/Try/API/beta2/First_API_beta2/obj/Debug/net8.0/First_API_beta2.sourcelink.json
