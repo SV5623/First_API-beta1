@@ -4,10 +4,10 @@ namespace boba_API.Models;
 
 public class Role
 {
-    [Key] 
+    [Key]
     public int Id { get; set; }
 
     public required string Role_Name { get; set; }
-    
-    public List<UserRole> UserRoles { get; set; }
+
+    public virtual List<UserRole> UserRoles { get; set; }
 }

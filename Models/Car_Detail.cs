@@ -6,10 +6,14 @@ public class Car_Detail
 {
     [Key]
     public int Id { get; set; }
-    
-    public string Name { get; set; }
-    public decimal Price { get; set; }
+
+    public required string Title { get; set; }
+    public required decimal Price { get; set; }
+    public string Code { get; set; }
 
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public virtual Car Car { get; set; }
+
+    public int StorageId { get; set; }
+    public virtual Storage Storage { get; set; }
 }
