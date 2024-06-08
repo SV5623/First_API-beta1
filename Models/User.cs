@@ -1,14 +1,9 @@
-using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace boba_API.Models;
 
-public class User
+public class User : IdentityUser
 {
-    [Key]
-    public int Id { get; set; }
-    public required string Name { get; set; }
-    public required int Password { get; set; }
-    public required string Email { get; set; }
-
-    public virtual List<UserRole> UserRoles { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 }

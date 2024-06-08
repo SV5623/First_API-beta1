@@ -1,4 +1,5 @@
 using boba_API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,14 @@ builder.Services.AddDbContext<Dyplom2Context>(options =>
     options.UseLazyLoadingProxies()
         .UseNpgsql(builder.Configuration.GetConnectionString("Host"));
 });
+builder
+    .Services.AddIdentityApiEndpoints<User>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<Dyplom2Context>();
 
 var app = builder.Build();
 
