@@ -8,6 +8,6 @@ public class Client
     public int Id { get; set; }
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    
-    public List<Car> Cars { get; set; }
+
+    public virtual List<Car> Cars { get; set; }
 }

@@ -4,10 +4,10 @@ namespace boba_API.Models;
 
 public class Calendar
 {
-    [Key] 
+    [Key]
     public int Id { get; set; }
     public required DateTime Date { get; set; }
-    
+
     public required int CarId { get; set; }
-    public Car Car { get; set; }
+    public virtual Car Car { get; set; }
 }
