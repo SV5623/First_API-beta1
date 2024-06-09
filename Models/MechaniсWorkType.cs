@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace boba_API.Models;
 
@@ -10,6 +11,8 @@ public class MechaniсWorkType
     public virtual Mechaniс Mechanic { get; set; }
 
     public int WorkTypeId { get; set; }
+    
+    [ForeignKey("WorkTypeId")]
     public virtual WorkType WorkType { get; set; }
 }
 

@@ -11,8 +11,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<Dyplom2Context>(options =>
 {
-    options.UseLazyLoadingProxies()
-        .UseNpgsql(builder.Configuration.GetConnectionString("Host"));
+    options.UseMySql(builder.Configuration.GetConnectionString("MySQLConnection") ?? string.Empty,
+        new MySqlServerVersion(new Version(8, 0, 21)));
+
 });
 builder
     .Services.AddIdentityApiEndpoints<User>(options =>
@@ -32,6 +33,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 // }
 
+app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 
 app.MapControllers();
