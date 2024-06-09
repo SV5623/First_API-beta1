@@ -1,5 +1,6 @@
 using boba_API.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace First_API_beta2.Controllers;
@@ -10,12 +11,20 @@ namespace First_API_beta2.Controllers;
 public class UserController : Controller
 {
     private readonly Dyplom2Context _context;
+    private readonly UserManager<User> _userManager;
 
-    public UserController(Dyplom2Context context)
+    public UserController(Dyplom2Context context, UserManager<User> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
+    [HttpGet("information")]
+    public async Task<IActionResult> GetInformation()
+    {
+        var user = await _userManager.GetUserAsync(User);
+        return Ok(user);
+    }
     //----------------------GET----------------------
     [HttpGet]
 
