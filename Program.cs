@@ -33,6 +33,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 // }
 
+app.MapIdentityApi<User>();
 app.UseHttpsRedirection();
 
 app.MapControllers();
