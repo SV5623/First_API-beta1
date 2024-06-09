@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using boba_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,8 +23,16 @@ public class UserController : Controller
     [HttpGet("information")]
     public async Task<IActionResult> GetInformation()
     {
+        var roles = ((ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == ClaimTypes.Role)
+                .Select(c => c.Value);
+
         var user = await _userManager.GetUserAsync(User);
-        return Ok(user);
+        return Ok(new
+        {
+            User = user,
+            Roles = roles
+        });
     }
     //----------------------GET----------------------
     [HttpGet]
