@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace First_API_beta2.Controllers;
 [Route("api/User")]
 [ApiController]
+// [Authorize(Roles = "Admin")]
 [Authorize]
 public class UserController : Controller
 {
@@ -17,13 +18,13 @@ public class UserController : Controller
 
     //----------------------GET----------------------
     [HttpGet]
-    
+
     public IActionResult GetAllUsers()
     {
         var users = _context.Users.ToList();
         return Ok(users);
     }
-    
+
     //----------------------GET{id}----------------------
 
     [HttpGet("Id")]
