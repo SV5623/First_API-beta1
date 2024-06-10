@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace First_API_beta2.Controllers;
-[Route("api/User")]
+[Route("api/[controller]")]
 [ApiController]
 // [Authorize(Roles = "Admin")]
 [Authorize]
@@ -81,8 +80,30 @@ public class UserController : Controller
         return Ok(user);
     }
 
+    
+
     [HttpPatch("{id}")]
-    public IActionResult PatchUser([FromRoute] string id, [FromBody] UserDTO userDTO)
+    public IActionResult PatchUserById([FromRoute] string email, [FromBody] UserDTO userDTO)
+    {
+        var edit_user = _context.Users.FirstOrDefault(x => x.Email == email);
+
+        if (edit_user == null)
+        {
+            return NotFound();
+        }
+
+        edit_user.FirstName = userDTO.FirstName;
+
+        edit_user.LastName = userDTO.LastName;
+
+        edit_user.Email = userDTO.Email;
+
+        // Збереження змін
+        _context.SaveChanges();
+
+        return Ok(edit_user.ToUserDto());
+    }
+    public IActionResult PatchAdvancedUser([FromRoute] string id, [FromBody] UserDTO userDTO)
     {
         var edit_user = _context.Users.FirstOrDefault(x => x.Id == id);
 
@@ -102,12 +123,7 @@ public class UserController : Controller
 
         return Ok(edit_user.ToUserDto());
     }
-
-
-    [HttpPatch("{id}")]
-
-
-
+    
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser([FromRoute] string id)
