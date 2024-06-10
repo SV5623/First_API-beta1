@@ -5,6 +5,7 @@ namespace boba_API.Models;
 
 public class Dyplom2Context : IdentityDbContext<User>
 {
+
     public Dyplom2Context(DbContextOptions<Dyplom2Context> options) : base(options)
     {
     }
@@ -12,11 +13,11 @@ public class Dyplom2Context : IdentityDbContext<User>
     // public DbSet<User> Users { get; set; }
 
     public DbSet<Car_Detail> CarDetails { get; set; }
-    
+
     public DbSet<Car> Cars { get; set; }
-    
+
     public DbSet<Calendar> Calendars { get; set; }
-    
+
     public DbSet<Storage> Storages { get; set; }
 
     public DbSet<MechaniсWorkType> MechaniсWorkTypes { get; set; }

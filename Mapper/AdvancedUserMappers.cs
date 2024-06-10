@@ -5,14 +5,14 @@ namespace First_API_beta2.Mapper;
 
 public static class AdvancedUserMappers
 {
-    // public static AdvancedUserMappers ToAdvancedUserDTO(this User userModel)
-    // {
-    //     return new AdvancedUserDTO()
-    //     {
-    //         roles = userModel.
-    //         FirstName = userModel.FirstName,
-    //         LastName = userModel.LastName,
-    //         Email = userModel.Email
-    //     };
-    // }
+  public static AdvancedUserDTO ToAdvancedUserDTO(User userModel, IList<string> roles)
+  {
+    return new AdvancedUserDTO()
+    {
+      Roles = roles,
+      FirstName = userModel.FirstName,
+      LastName = userModel.LastName,
+      Email = userModel.Email
+    };
+  }
 }

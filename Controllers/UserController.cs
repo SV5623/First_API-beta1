@@ -5,6 +5,7 @@ using First_API_beta2.Mapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace First_API_beta2.Controllers;
@@ -25,7 +26,7 @@ public class UserController : Controller
         _userManager = userManager;
     }
 
-    [HttpGet("current user")]
+    [HttpGet("current users")]
     public async Task<IActionResult> GetInformation()
     {
         var roles = ((ClaimsIdentity)User.Identity).Claims
@@ -39,6 +40,7 @@ public class UserController : Controller
             Roles = roles
         });
     }
+
     //----------------------GET----------------------
     [HttpGet("DTO's version")]
 
@@ -48,14 +50,22 @@ public class UserController : Controller
             .Select(s => s.ToUserDto());
         return Ok(users);
     }
-    
-    
+
+
     [HttpGet]
     public async Task<IActionResult> GetAllUsersFull()
     {
-        var users = await _userManager.GetUserAsync(User);
-        var roles = await _userManager.GetRolesAsync(users);
-        return Ok(users);
+        var users = await _context.Users.ToListAsync();
+        var usersDtoWithRoles = new List<AdvancedUserDTO>();
+
+        foreach (var user in users)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            var userDtoWithRoles = AdvancedUserMappers.ToAdvancedUserDTO(user, roles);
+            usersDtoWithRoles.Add(userDtoWithRoles);
+        }
+
+        return Ok(usersDtoWithRoles);
     }
 
     //----------------------GET{id}----------------------
@@ -75,11 +85,12 @@ public class UserController : Controller
     public IActionResult PatchUser([FromRoute] string id, [FromBody] UserDTO userDTO)
     {
         var edit_user = _context.Users.FirstOrDefault(x => x.Id == id);
+
         if (edit_user == null)
         {
             return NotFound();
         }
-        
+
         edit_user.FirstName = userDTO.FirstName;
 
         edit_user.LastName = userDTO.LastName;
@@ -91,13 +102,13 @@ public class UserController : Controller
 
         return Ok(edit_user.ToUserDto());
     }
-    
-    
+
+
     [HttpPatch("{id}")]
-    
-    
-    
-    
+
+
+
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser([FromRoute] string id)
     {
