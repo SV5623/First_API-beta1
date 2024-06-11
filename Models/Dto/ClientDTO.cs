@@ -1,7 +1,7 @@
 
 namespace boba_API.Models.Dto;
 
-public class AdvancedUserDTO
+public class ClientDTO
 {
     public IList<string> Roles { get; set; }
 
